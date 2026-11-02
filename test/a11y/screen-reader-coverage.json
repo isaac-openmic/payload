@@ -754,11 +754,11 @@
       "report": "Payload: Versions & Publishing - Strikethrough information is not communicated",
       "expected": "Previous updates that have a strikethrough are accurately announced that it is a previous edit.",
       "reportedScreenReaders": ["VoiceOver"],
-      "coverage": "pending-stacked-runtime-fix",
+      "coverage": "browser-plus-manual",
       "tests": [
         "WCAG.audit.spec.ts :: should expose a translated deletion cue beside removed version text"
       ],
-      "limits": "Runtime remedy is intentionally absent from this test-only base PR. Its browser regression is explicitly fixme until the stacked package PR enables it. Historical manual passes apply to the pre-split combined implementation, not this base branch. Guidepup case retired by user approval after unreliable capture/navigation. Browser tests prove semantics/keyboard behavior, not speech or virtual-cursor grouping. VoiceOver spoke Deletion immediately before removed text without duplicate/excessive cues; observed-pass on the tested version comparison. WebKit/VoiceOver only; no NVDA or untested variant claims.",
+      "limits": "Guidepup case retired by user approval after unreliable capture/navigation. Browser tests prove semantics/keyboard behavior, not speech or virtual-cursor grouping. VoiceOver spoke Deletion immediately before removed text without duplicate/excessive cues; observed-pass on the tested version comparison. WebKit/VoiceOver only; no NVDA or untested variant claims.",
       "manualVerification": "VoiceOver spoke Deletion immediately before removed text without duplicate/excessive cues; observed-pass on the tested version comparison. WebKit/VoiceOver only; no NVDA or untested variant claims."
     },
     {
@@ -886,12 +886,12 @@
       "report": "Payload: Content Management - Page content is announced before dialog modal",
       "expected": "Dialog modal with descriptive title / label is announced when displayed.",
       "reportedScreenReaders": ["NVDA"],
-      "coverage": "pending-stacked-runtime-fix",
+      "coverage": "screen-reader-regression-retained",
       "tests": [
         "screen-reader.spec.ts :: should announce the deletion dialog before background page content",
         "WCAG.audit.spec.ts :: should expose a named deletion alert with its warning and safe initial focus"
       ],
-      "limits": "Runtime remedy is intentionally absent from this test-only base PR. Its browser regression is explicitly fixme until the stacked package PR enables it. Historical manual passes apply to the pre-split combined implementation, not this base branch. Document edit -> More options -> Delete now has an observed manual WebKit/VoiceOver pass at dcf8e5a840: automatic title announcement, safe initial focus and announced opener restoration. Earlier candidates failed. Original Windows/NVDA/Chrome outcome remains unverified; the retained Guidepup case has not been rerun after the alert-dialog change.",
+      "limits": "Document edit -> More options -> Delete now has an observed manual WebKit/VoiceOver pass at dcf8e5a840: automatic title announcement, safe initial focus and announced opener restoration. Earlier candidates failed. Original Windows/NVDA/Chrome outcome remains unverified; the retained Guidepup case has not been rerun after the alert-dialog change.",
       "manualVerification": "2026-11-02 at dcf8e5a840: automatic opening speech \"Cancel button, Confirm deletion\"; initial focus Cancel; Escape returns to and announces \"More options\". Observed-pass for these three tested WebKit/VoiceOver aspects only.",
       "manualEvidenceRef": "latestVerification.manualEvidence"
     },
@@ -2259,7 +2259,7 @@
       "Original reported NVDA outcomes remain unverified.",
       "PYLD-3580: unpatched focused-toast dismissal remains open; retained regression is fixme, not passing coverage."
     ],
-    "implementationScope": "Historical runtime manual passes refer to the combined snapshot; package remedies are absent from this test-only base PR."
+    "implementationScope": "Runtime remedies are present on this upper branch. Its package files are identical to the pre-split combined snapshot with the recorded manual passes."
   },
   "sonnerPatchRemoval20261102": {
     "reason": "Repository pnpm patch does not automatically reach customers; Sonner remains an external runtime dependency. User requested removal.",
@@ -2295,13 +2295,13 @@
     }
   },
   "prSplit20261102": {
-    "scope": "Test-only base PR #18908. Root package manifest/lockfile changes are Guidepup test tooling only; no packages/ changes.",
+    "scope": "Stacked runtime remediation PR, based on test-only PR #18908. All package changes and enabling the three pending regressions live here.",
     "runtimeBranch": "codex/a11y-screen-reader-remediation",
-    "runtimeFixesPresent": false,
-    "pendingBrowserRegressions": ["PYLD-3722", "PYLD-3769"],
+    "runtimeFixesPresent": true,
+    "pendingBrowserRegressions": [],
     "combinedSnapshot": "0d7a5306391ce16153a39fe0d9524618026b2112",
-    "limits": "Two browser regressions and the native deletion-dialog regression are pending in the base and enabled by the stacked fix PR. PYLD-3580 remains separately deferred. Runtime speech verification must use the upper branch.",
-    "pendingNativeRegressions": ["PYLD-3769"],
+    "limits": "The base has two pending browser regressions and one pending native regression; this branch enables them. PYLD-3580 remains separately deferred. No new native speech test execution or full green suite is claimed.",
+    "pendingNativeRegressions": [],
     "baseNativeCases": {
       "defined": 11,
       "enabled": 10,
@@ -2312,6 +2312,16 @@
       "pending": 2,
       "duration": "16.3 seconds",
       "log": "/tmp/guidepup-split-base-browser.log"
+    },
+    "upperNativeCases": {
+      "defined": 11,
+      "enabled": 11
+    },
+    "upperBrowserCheck": {
+      "passed": 5,
+      "duration": "20.2 seconds",
+      "log": "/tmp/guidepup-split-upper-browser.log",
+      "packageTree": "Identical to pre-split combined snapshot 0d7a530639; no implementation changes introduced by the split."
     }
   }
 }

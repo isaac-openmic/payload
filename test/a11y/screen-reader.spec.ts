@@ -76,8 +76,7 @@ test.describe('WCAG 2.2 Level AA — Screen readers', () => {
       })
     }
 
-    // PYLD-3769: enabled by the stacked package remediation PR.
-    test.fixme(
+    test(
       'should announce the deletion dialog before background page content',
       { tag: ['@dialogs', '@trash'] },
       async ({ page, screenReader }) => {
